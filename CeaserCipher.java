@@ -9,13 +9,13 @@ public class CeaserCipher {
      */
     public static void main(String[] args) {
         // Encryption and decryption of Hello world
-        String text = "How you friend";
-        int shiftCount = 1;
+        String text = "Hello world";
+        int shiftCount = 4;
         String encrypt = CeaserCipher.make(shiftCount, 0, 0, text);
         String decrypt = CeaserCipher.make(shiftCount, 1, 0, encrypt);
         System.out.println("Plain text: "+ text);
-        System.out.println("Encrypted: "+ encrypt);
-        System.out.println("Decrypted: "+ decrypt);
+        System.out.println("Encrypted text: "+ encrypt);
+        System.out.println("Decrypted text: "+ decrypt);
         
     }
     
@@ -78,4 +78,3 @@ public class CeaserCipher {
         return result.toString();
     }
 }
-
