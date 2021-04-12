@@ -1,17 +1,29 @@
 package ceasercipher;
 
+import javax.swing.JOptionPane;
+
 public class CeaserCipher {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        String text = "hello world";
-        String encryptedText = CeaserCipher.encrypt(text, 4);
-        String decryptedText = CeaserCipher.decrypt(encryptedText, 4);
-        System.out.println("Encrypt: " + encryptedText);
-        System.out.println("Encrypt: " + decryptedText);
+        // Encryption and decryption of Hello world
+        String text = "How you friend";
+        int shiftCount = 1;
+        String encrypt = CeaserCipher.make(shiftCount, 0, 0, text);
+        String decrypt = CeaserCipher.make(shiftCount, 1, 0, encrypt);
+        System.out.println("Plain text: "+ text);
+        System.out.println("Encrypted: "+ encrypt);
+        System.out.println("Decrypted: "+ decrypt);
+        
+    }
+    
+    public static String make(int shiftcount, int operation, int language, String text){
+        String result;
+        if ( operation == 0 ) result = CeaserCipher.encrypt(text,shiftcount);
+        else result = CeaserCipher.decrypt(text, shiftcount);
+        return result;
     }
 
     public static String encrypt(String text, int s) {
@@ -31,6 +43,8 @@ public class CeaserCipher {
 
             result.append(ch);
         }
+        
+        
         return result.toString();
     }
 
@@ -46,15 +60,22 @@ public class CeaserCipher {
                     ch = (char) charDec;
 
                 } else {
-                    charDec = ((int) (cipher.charAt(i) - s) - 97) % 26 + 97;
+                   
+                    if(cipher.charAt(i) == 'a') {
+                        charDec = ((int) (cipher.charAt(i) +  26 - s));
+                    } else {
+                        
+                        charDec = ((int) (cipher.charAt(i) -  s - 97)) % 26 + 97;
+                    }
+                
                     ch = (char) (charDec);
 
                 }
             }
 
-            System.out.println("ch: " + cipher.charAt(i) + " dec: " + charDec);
             result.append(ch);
         }
         return result.toString();
     }
 }
+
